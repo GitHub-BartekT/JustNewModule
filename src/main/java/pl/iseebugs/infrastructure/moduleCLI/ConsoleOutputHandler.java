@@ -6,10 +6,10 @@ class ConsoleOutputHandler {
     }
 
     public void printError(String errorMessage) {
-        System.err.println("Błąd: " + errorMessage);
+        System.err.println("Error: " + errorMessage);
     }
 
     public void printTree(String treeStructure) {
-        System.out.println("\nStruktura modułu:\n" + treeStructure);
+        System.out.println("\nModule Structure:\n" + treeStructure);
     }
 }

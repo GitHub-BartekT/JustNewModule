@@ -10,7 +10,7 @@ class ConsoleInputHandler {
     }
 
     public String askForString(String message, String defaultValue) {
-        System.out.print(message + (defaultValue != null ? " (domyślnie: " + defaultValue + "): " : ": "));
+        System.out.print(message + (defaultValue != null ? " (default: " + defaultValue + "): " : ": "));
         String input = scanner.nextLine().trim();
         return input.isEmpty() && defaultValue != null ? defaultValue : input;
     }

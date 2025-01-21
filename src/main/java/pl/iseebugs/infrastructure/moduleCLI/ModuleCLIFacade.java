@@ -5,7 +5,7 @@ import pl.iseebugs.infrastructure.pomanalyzer.dto.PomData;
 
 import java.util.Optional;
 
-public class ModuleCLIFacade {
+public class ModuleCLIFacade implements ModuleCLIPort {
     private final ConsoleInputHandler inputHandler;
     private final ConsoleOutputHandler outputHandler;
     private final PomAnalyzer pomAnalyzer;
@@ -17,7 +17,10 @@ public class ModuleCLIFacade {
     }
 
     public void run() {
-        outputHandler.printMessage("I am starting project analyze...");
+        outputHandler.printMessage("I am starting to analyze the project ...");
+
+        //TODO Is there any JNM-name.xml file?
+        // if yes then use it instead of pom.xml
 
         PomData pomData = pomAnalyzer.analyzePom();
         if (pomData == null) {
