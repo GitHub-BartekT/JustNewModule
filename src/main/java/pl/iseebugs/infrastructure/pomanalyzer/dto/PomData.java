@@ -63,9 +63,13 @@ public class PomData {
 
         if (getDependencies().stream().anyMatch(dep -> dep.contains("spring-boot"))) {
             sb.append("\nProject uses Spring Boot.\n");
+        } else {
+            sb.append("\nProject does not use Spring Boot.\n");
         }
         if (getDependencies().stream().anyMatch(dep -> dep.contains("lombok"))) {
             sb.append("Project uses Lombok.\n");
+        } else {
+            sb.append("Project does not use Lombok.\n");
         }
 
         return sb.toString();

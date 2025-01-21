@@ -31,10 +31,12 @@ Once you adjust the project structure to your needs, the app can create REST-bas
 ### Website
 🌐[Go to the project website!](https://justnewmodule.com/)🌐
 
+
+
 ## Pending features
 
 ### Directory
-  * Reading configuration from ```pom.xml``` 
+  * ~~Reading configuration from~~ ```pom.xml``` ✅
   * Creating directory structure
   * Visualize directory structure
   * Save user settings to XML file
