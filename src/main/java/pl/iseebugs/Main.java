@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
-        PomData pomData = new PomAnalyzer().analyzePom();
+        PomAnalyzer pomAnalyzer = new PomAnalyzer();
+        PomData pomData = pomAnalyzer.analyzePom();
 
         Optional.ofNullable(pomData)
                 .ifPresent(System.out::println);

@@ -31,7 +31,9 @@ Once you adjust the project structure to your needs, the app can create REST-bas
 ### Website
 🌐[Go to the project website!](https://justnewmodule.com/)🌐
 
+## Algorithm
 
+* App gets data from pom.xml
 
 ## Pending features
 
