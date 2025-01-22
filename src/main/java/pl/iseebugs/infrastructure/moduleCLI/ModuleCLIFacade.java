@@ -76,8 +76,8 @@ public class ModuleCLIFacade implements ModuleCLIPort {
 
         ClassGeneratorFacade.generateDTO(moduleProperties);
         ClassGeneratorFacade.generateService(moduleProperties);
-        ClassGeneratorFacade.generateGameEntity(moduleProperties);
-        ClassGeneratorFacade.generateGameMapper(moduleProperties);
+        ClassGeneratorFacade.generateEntity(moduleProperties);
+        ClassGeneratorFacade.generateMapper(moduleProperties);
         ClassGeneratorFacade.generateRestController(moduleProperties);
         outputHandler.printMessage("The module structure has been successfully built");
     }

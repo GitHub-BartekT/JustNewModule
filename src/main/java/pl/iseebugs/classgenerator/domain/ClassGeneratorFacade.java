@@ -145,14 +145,14 @@ public class ClassGeneratorFacade {
         ClassWriter.writeFile(filePath, content.toString());
     }
 
-    public static void generateGameEntity(ModuleProperties moduleProperties) {
+    public static void generateEntity(ModuleProperties moduleProperties) {
         Path basePath = Path.of(System.getProperty("user.dir"), "src", "main", "java");
         String packagePath = moduleProperties.getGroupId()
                 + "." + moduleProperties.getModuleName()
                 + ".domain";
         String fullPackagePath = basePath.resolve(packagePath.replace(".", File.separator)).toString();
 
-        String className = "Game";
+        String className = capitalizeFirstLetter(moduleProperties.getModuleName());
         String filePath = fullPackagePath + File.separator + className + ".java";
 
         StringBuilder content = new StringBuilder();
@@ -165,7 +165,7 @@ public class ClassGeneratorFacade {
         }
 
         content.append("\n@Entity\n")
-                .append("@Table(name = \"games\")\n");
+                .append("@Table(name = \"" + className + "\")\n");
 
         if (moduleProperties.isHasLombok()) {
             content.append("@Getter\n")
@@ -175,7 +175,7 @@ public class ClassGeneratorFacade {
                     .append("@AllArgsConstructor\n");
         }
 
-        content.append("public class ").append(className).append(" {\n\n")
+        content.append("public class ").append(capitalizeFirstLetter(className)).append(" {\n\n")
                 .append("    @Id\n")
                 .append("    @GeneratedValue(strategy = GenerationType.IDENTITY)\n")
                 .append("    private Long id;\n\n")
@@ -214,8 +214,8 @@ public class ClassGeneratorFacade {
                 .append("    public boolean equals(Object o) {\n")
                 .append("        if (this == o) return true;\n")
                 .append("        if (o == null || getClass() != o.getClass()) return false;\n")
-                .append("        ").append(className).append(" game = (").append(className).append(") o;\n")
-                .append("        return Objects.equals(id, game.id) && Objects.equals(name, game.name);\n")
+                .append("        ").append(className).append(" " + className.toLowerCase() + " = (").append(className).append(") o;\n")
+                .append("        return Objects.equals(id, " + className.toLowerCase() + ".id) && Objects.equals(name, " + className.toLowerCase() + ".name);\n")
                 .append("    }\n\n")
                 .append("    @Override\n")
                 .append("    public int hashCode() {\n")
@@ -227,7 +227,7 @@ public class ClassGeneratorFacade {
         ClassWriter.writeFile(filePath, content.toString());
     }
 
-    public static void generateGameMapper(ModuleProperties moduleProperties) {
+    public static void generateMapper(ModuleProperties moduleProperties) {
         Path basePath = Path.of(System.getProperty("user.dir"), "src", "main", "java");
         String packagePath = moduleProperties.getGroupId()
                 + "." + moduleProperties.getModuleName()
@@ -235,9 +235,9 @@ public class ClassGeneratorFacade {
 
         String fullPackagePath = basePath.resolve(packagePath.replace(".", File.separator)).toString();
 
-        String className = "GameMapper";
-        String entityName = "Game";
-        String dtoName = "GameDTO";
+        String className = capitalizeFirstLetter(moduleProperties.getModuleName()) + "Mapper";
+        String entityName = capitalizeFirstLetter(moduleProperties.getModuleName());
+        String dtoName = capitalizeFirstLetter(moduleProperties.getModuleName()) +"DTO";
         String domainPath = moduleProperties.getGroupId()
                 + "." + moduleProperties.getModuleName()
                 + ".domain";
