@@ -1,4 +1,4 @@
-package pl.iseebugs.domain.structuregenerator.dto;
+package pl.iseebugs.structuregenerator.dto;
 
 public class ModuleProperties {
     private String groupId;

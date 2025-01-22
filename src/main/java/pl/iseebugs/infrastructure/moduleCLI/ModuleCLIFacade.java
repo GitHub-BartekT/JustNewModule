@@ -1,6 +1,7 @@
 package pl.iseebugs.infrastructure.moduleCLI;
 
-import pl.iseebugs.domain.structuregenerator.dto.ModuleProperties;
+import pl.iseebugs.structuregenerator.domain.StructureGeneratorFacade;
+import pl.iseebugs.structuregenerator.dto.ModuleProperties;
 import pl.iseebugs.infrastructure.pomanalyzer.PomAnalyzer;
 import pl.iseebugs.infrastructure.pomanalyzer.dto.PomData;
 
@@ -20,6 +21,8 @@ public class ModuleCLIFacade implements ModuleCLIPort {
     public void run() {
 
         ModuleProperties moduleProperties = new ModuleProperties();
+        StructureGeneratorFacade structureGenerator = new StructureGeneratorFacade();
+
         outputHandler.printMessage("I am starting to analyze the project ...");
 
         //TODO Is there any JNM-name.xml file?
@@ -54,10 +57,12 @@ public class ModuleCLIFacade implements ModuleCLIPort {
         moduleProperties.setInfrastructurePackage(infrastructurePackage);
 
         //TODO: StructureGenerator
+        structureGenerator.createScheme(moduleProperties);
         String tree = "there will be structure tree";
         outputHandler.printTree(tree);
         //TODO: goto: loop
 
+        structureGenerator.generateStructure();
         //TODO: create xml file
 
         //TODO: create files

@@ -1,4 +1,4 @@
-package pl.iseebugs.domain.structuregenerator.dto;
+package pl.iseebugs.structuregenerator.dto;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

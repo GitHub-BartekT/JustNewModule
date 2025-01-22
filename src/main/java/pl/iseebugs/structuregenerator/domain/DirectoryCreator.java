@@ -1,6 +1,6 @@
-package pl.iseebugs.domain.structuregenerator;
+package pl.iseebugs.structuregenerator.domain;
 
-import pl.iseebugs.domain.structuregenerator.dto.ModuleStructure;
+import pl.iseebugs.structuregenerator.dto.ModuleStructure;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

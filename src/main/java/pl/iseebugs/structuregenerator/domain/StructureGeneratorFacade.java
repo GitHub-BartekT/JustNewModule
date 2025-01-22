@@ -1,12 +1,16 @@
-package pl.iseebugs.domain.structuregenerator;
+package pl.iseebugs.structuregenerator.domain;
 
-import pl.iseebugs.domain.structuregenerator.dto.ModuleStructure;
-import pl.iseebugs.domain.structuregenerator.dto.ModuleProperties;
+import pl.iseebugs.structuregenerator.dto.ModuleStructure;
+import pl.iseebugs.structuregenerator.dto.ModuleProperties;
+
+import java.nio.file.Paths;
 
 public class StructureGeneratorFacade implements StructureGeneratorPort{
+
+    private static final ModuleStructure root = new ModuleStructure("src");
+
     @Override
-    public ModuleStructure generateStructure(final ModuleProperties moduleProperties) {
-        ModuleStructure root = new ModuleStructure("src");
+    public ModuleStructure createScheme(final ModuleProperties moduleProperties) {
         ModuleStructure main = new ModuleStructure("main");
         ModuleStructure java = new ModuleStructure("java");
 
@@ -45,8 +49,9 @@ public class StructureGeneratorFacade implements StructureGeneratorPort{
         return root;
     }
 
-    private void createScheme(){
-
+    @Override
+    public void generateStructure(){
+        DirectoryCreator.createDirectories(root, Paths.get(System.getProperty("user.dir")));
     };
 
 }
