@@ -23,13 +23,6 @@ public class StructureGeneratorFacade implements StructureGeneratorPort{
             currentGroupIdNode = groupIdPart;
         }
 
-
-        if (moduleProperties.getArtifactId() != null) {
-            ModuleStructure artifact = new ModuleStructure(moduleProperties.getArtifactId());
-            currentGroupIdNode.addChild(artifact);
-            currentGroupIdNode = artifact;
-        }
-
         ModuleStructure infrastructure = new ModuleStructure(moduleProperties.getInfrastructurePackage());
         ModuleStructure module = new ModuleStructure(moduleProperties.getModuleName());
         ModuleStructure logic = new ModuleStructure(moduleProperties.getLogicPackage());

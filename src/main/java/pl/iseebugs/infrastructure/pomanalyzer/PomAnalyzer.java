@@ -10,7 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.List;
 
-public class PomAnalyzer implements PomAnalyzerImpl{
+public class PomAnalyzer implements PomAnalyzerImpl {
 
     private static final String POM_FILE = "pom.xml";
     private static final PomData pomData = new PomData();
@@ -18,7 +18,7 @@ public class PomAnalyzer implements PomAnalyzerImpl{
     public PomData analyzePom() {
         File pomFile = new File(POM_FILE);
         if (!pomFile.exists()) {
-            System.out.println("There is not pom.xml file in this directory.");
+            System.out.println("There is no pom.xml file in this directory.");
             return null;
         }
 
@@ -27,10 +27,7 @@ public class PomAnalyzer implements PomAnalyzerImpl{
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(pomFile);
 
-            NodeList groupIdNodes = document.getElementsByTagName("groupId");
-            if (groupIdNodes.getLength() > 0) {
-                pomData.setGroupId(groupIdNodes.item(0).getTextContent());
-            }
+            pomData.setGroupId(getTagValueOutsideParent(document, "groupId"));
 
             NodeList artifactIdNodes = document.getElementsByTagName("artifactId");
             if (artifactIdNodes.getLength() > 0) {
@@ -60,20 +57,39 @@ public class PomAnalyzer implements PomAnalyzerImpl{
         }
     }
 
-    //TODO:
-    @Override
-    public PomData getDataFromXML(final String fileName) {
+    private static String getTagValueOutsideParent(Document document, String tagName) {
+        NodeList nodes = document.getElementsByTagName(tagName);
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Element element = (Element) nodes.item(i);
+            if (!isInsideParent(element)) {
+                return element.getTextContent();
+            }
+        }
         return null;
     }
 
-    //TODO:
-    @Override
-    public List<String> getXMLFileNames() {
-        return null;
+    private static boolean isInsideParent(Element element) {
+        NodeList parents = element.getParentNode().getParentNode().getChildNodes();
+        for (int i = 0; i < parents.getLength(); i++) {
+            if (parents.item(i).getNodeName().equals("parent")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static String getTagValue(Element element, String tagName) {
         NodeList nodes = element.getElementsByTagName(tagName);
         return (nodes.getLength() > 0) ? nodes.item(0).getTextContent() : null;
+    }
+
+    @Override
+    public PomData getDataFromXML(final String fileName) {
+        return null;
+    }
+
+    @Override
+    public List<String> getXMLFileNames() {
+        return null;
     }
 }
