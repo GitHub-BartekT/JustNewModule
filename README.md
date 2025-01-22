@@ -39,9 +39,10 @@ Once you adjust the project structure to your needs, the app can create REST-bas
 
 ### Directory
   * ~~Reading configuration from~~ ```pom.xml``` ✅
-  * Creating directory structure
+  * ~~Creating directory structure~~ ✅
   * Visualize directory structure
   * Save user settings to XML file
+  * Reading configuration from user configuration file ```.xml```
 ### Files
   * Create foundational files
   * Create files with required annotations

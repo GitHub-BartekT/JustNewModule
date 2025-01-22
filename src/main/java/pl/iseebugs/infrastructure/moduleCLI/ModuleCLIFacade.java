@@ -1,5 +1,7 @@
 package pl.iseebugs.infrastructure.moduleCLI;
 
+import pl.iseebugs.structuregenerator.domain.StructureGeneratorFacade;
+import pl.iseebugs.structuregenerator.dto.ModuleProperties;
 import pl.iseebugs.infrastructure.pomanalyzer.PomAnalyzer;
 import pl.iseebugs.infrastructure.pomanalyzer.dto.PomData;
 
@@ -17,6 +19,10 @@ public class ModuleCLIFacade implements ModuleCLIPort {
     }
 
     public void run() {
+
+        ModuleProperties moduleProperties = new ModuleProperties();
+        StructureGeneratorFacade structureGenerator = new StructureGeneratorFacade();
+
         outputHandler.printMessage("I am starting to analyze the project ...");
 
         //TODO Is there any JNM-name.xml file?
@@ -28,19 +34,35 @@ public class ModuleCLIFacade implements ModuleCLIPort {
             return;
         }
 
+        boolean hasSpringBootDependency = pomData.getDependencies().stream().anyMatch(dep -> dep.contains("spring-boot"));
+        boolean hasSpringLombok = pomData.getDependencies().stream().anyMatch(dep -> dep.contains("lombok"));
+
+        moduleProperties.setGroupId(pomData.getGroupId());
+        moduleProperties.setArtifactId(pomData.getArtifactId());
+        moduleProperties.setHasSpringBoot(hasSpringBootDependency);
+        moduleProperties.setHasLombok(hasSpringLombok);
+
         Optional.of(pomData)
                 .ifPresent(System.out::println);
 
         //TODO: loop
+
+
         String moduleName = inputHandler.askForString("Provide a module name (if empty then -> \"newmodule\"): ", "newmodule");
-        String domainPackage = inputHandler.askForString("Provide a logic package name (if empty then -> \"domain\"): ", "domain");
-        String infrastructurePackage = inputHandler.askForString("Provide a infrastructure package name (if empty then -> \"infrastructure\"): ", "adapters");
+        String logicPackage = inputHandler.askForString("Provide a logic package name (if empty then -> \"domain\"): ", "domain");
+        String infrastructurePackage = inputHandler.askForString("Provide a infrastructure package name (if empty then -> \"infrastructure\"): ", "infrastructure");
+
+        moduleProperties.setModuleName(moduleName);
+        moduleProperties.setLogicPackage(logicPackage);
+        moduleProperties.setInfrastructurePackage(infrastructurePackage);
 
         //TODO: StructureGenerator
+        structureGenerator.createScheme(moduleProperties);
         String tree = "there will be structure tree";
         outputHandler.printTree(tree);
         //TODO: goto: loop
 
+        structureGenerator.generateStructure();
         //TODO: create xml file
 
         //TODO: create files
