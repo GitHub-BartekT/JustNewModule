@@ -69,6 +69,13 @@ public class ModuleCLIFacade implements ModuleCLIPort {
         //TODO: create files
         ClassGeneratorFacade.generatePort(moduleProperties);
         ClassGeneratorFacade.generateException(moduleProperties);
+
+        if(moduleProperties.isHasSpringBoot()){
+            ClassGeneratorFacade.generateRepository(moduleProperties);
+        }
+
+        ClassGeneratorFacade.generateDTO(moduleProperties);
+
         outputHandler.printMessage("The module structure has been successfully built");
     }
 }
