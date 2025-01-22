@@ -17,7 +17,7 @@ public class ClassGeneratorFacade {
                 + "." + moduleProperties.getLogicPackage()                ;
 
         String fullPackagePath = basePath.resolve(packagePath.replace(".", File.separator)).toString();
-        String fileName = moduleProperties.getModuleName() + "Port";
+        String fileName = capitalizeFirstLetter(moduleProperties.getModuleName() + "Port");
         String filePath= fullPackagePath + File.separator + fileName + ".java";
 
         String moduleName = capitalizeFirstLetter(moduleProperties.getModuleName().toLowerCase());
@@ -37,6 +37,29 @@ public class ClassGeneratorFacade {
                 + "    List<" + moduleDTO + "> findAll();\n"
                 + "    void update" + moduleName + "(Long id, " + moduleDTO + " " + moduleName.toLowerCase() + ");\n"
                 + "    void delete" + moduleName + "(Long id);\n"
+                + "}\n";
+
+        ClassWriter.writeFile(filePath, content);
+    }
+
+    public static void generateException(ModuleProperties moduleProperties) {
+        Path basePath = Path.of(System.getProperty("user.dir"), "src", "main", "java");
+        String packagePath = moduleProperties.getGroupId()
+                + "." + moduleProperties.getModuleName()
+                + "." + moduleProperties.getLogicPackage()                ;
+        String fullPackagePath = basePath.resolve(packagePath.replace(".", File.separator)).toString();
+
+        String fileName = capitalizeFirstLetter(moduleProperties.getModuleName() + "NotFoundException");
+        String filePath= fullPackagePath + File.separator + fileName + ".java";
+
+        String content = "package " + packagePath + ";\n\n"
+                + "public class " + fileName + " extends Exception {\n\n"
+                + "    public " + fileName + "() {\n"
+                + "        super(\"" + moduleProperties.getModuleName() + " not found.\");\n"
+                + "    }\n"
+                + "    public " + fileName + "(String message) {\n"
+                + "        super(message);\n"
+                + "    }\n"
                 + "}\n";
 
         ClassWriter.writeFile(filePath, content);
