@@ -35,8 +35,6 @@ public class StructureGeneratorFacade implements StructureGeneratorPort{
         ModuleStructure logic = new ModuleStructure(moduleProperties.getLogicPackage());
         ModuleStructure dto = new ModuleStructure("dto");
 
-        logic.addChild(dto);
-
         module.addChild(logic);
         module.addChild(dto);
 
