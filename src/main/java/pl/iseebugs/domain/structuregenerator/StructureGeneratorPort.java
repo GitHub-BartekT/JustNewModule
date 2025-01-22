@@ -1,7 +1,8 @@
 package pl.iseebugs.domain.structuregenerator;
 
-import pl.iseebugs.domain.structuregenerator.dto.StructureDTO;
+import pl.iseebugs.domain.structuregenerator.dto.ModuleStructure;
+import pl.iseebugs.domain.structuregenerator.dto.ModuleProperties;
 
 interface StructureGeneratorPort {
-    void generateStructure(StructureDTO structureDTO);
+    ModuleStructure generateStructure(ModuleProperties moduleProperties);
 }

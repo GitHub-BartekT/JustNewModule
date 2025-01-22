@@ -1,5 +1,7 @@
 package pl.iseebugs.domain.structuregenerator;
 
+import pl.iseebugs.domain.structuregenerator.dto.ModuleStructure;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -25,5 +27,9 @@ class DirectoryCreator {
                 System.out.println("Something goes wrong with directory: " + folderName + "\n" + e.getMessage());
             }
         }
+    }
+
+    public static void createDirectoryStructure(){
+
     }
 }

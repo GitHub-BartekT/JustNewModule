@@ -1,10 +1,10 @@
-package pl.iseebugs.domain.structuregenerator;
+package pl.iseebugs.domain.structuregenerator.dto;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-class ModuleStructure {
+public class ModuleStructure {
     private String name;
     private Path path;
     private List<ModuleStructure> children;

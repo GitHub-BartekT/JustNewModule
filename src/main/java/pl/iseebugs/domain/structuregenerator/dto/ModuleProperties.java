@@ -1,9 +1,11 @@
 package pl.iseebugs.domain.structuregenerator.dto;
 
-public class StructureDTO {
+public class ModuleProperties {
     private String groupId;
     private String artifactId;
     private String moduleName;
+    private String logicPackage;
+    private String infrastructurePackage;
     private boolean hasSpringBoot;
     private boolean hasLombok;
 
@@ -29,6 +31,22 @@ public class StructureDTO {
 
     public void setModuleName(final String moduleName) {
         this.moduleName = moduleName;
+    }
+
+    public String getLogicPackage() {
+        return logicPackage;
+    }
+
+    public void setLogicPackage(final String logicPackage) {
+        this.logicPackage = logicPackage;
+    }
+
+    public String getInfrastructurePackage() {
+        return infrastructurePackage;
+    }
+
+    public void setInfrastructurePackage(final String infrastructurePackage) {
+        this.infrastructurePackage = infrastructurePackage;
     }
 
     public boolean isHasSpringBoot() {
