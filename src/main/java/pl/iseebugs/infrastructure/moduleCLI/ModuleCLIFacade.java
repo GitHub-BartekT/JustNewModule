@@ -70,12 +70,15 @@ public class ModuleCLIFacade implements ModuleCLIPort {
         ClassGeneratorFacade.generatePort(moduleProperties);
         ClassGeneratorFacade.generateException(moduleProperties);
 
-        if(moduleProperties.isHasSpringBoot()){
+      //  if(moduleProperties.isHasSpringBoot()){
             ClassGeneratorFacade.generateRepository(moduleProperties);
-        }
+        //}
 
         ClassGeneratorFacade.generateDTO(moduleProperties);
-
+        ClassGeneratorFacade.generateService(moduleProperties);
+        ClassGeneratorFacade.generateGameEntity(moduleProperties);
+        ClassGeneratorFacade.generateGameMapper(moduleProperties);
+        ClassGeneratorFacade.generateRestController(moduleProperties);
         outputHandler.printMessage("The module structure has been successfully built");
     }
 }
