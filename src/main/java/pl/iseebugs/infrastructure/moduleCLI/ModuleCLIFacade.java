@@ -1,5 +1,6 @@
 package pl.iseebugs.infrastructure.moduleCLI;
 
+import pl.iseebugs.classgenerator.domain.ClassGeneratorFacade;
 import pl.iseebugs.structuregenerator.domain.StructureGeneratorFacade;
 import pl.iseebugs.structuregenerator.dto.ModuleProperties;
 import pl.iseebugs.infrastructure.pomanalyzer.PomAnalyzer;
@@ -66,6 +67,7 @@ public class ModuleCLIFacade implements ModuleCLIPort {
         //TODO: create xml file
 
         //TODO: create files
+        ClassGeneratorFacade.generatePort(moduleProperties);
         outputHandler.printMessage("The module structure has been successfully built");
     }
 }
